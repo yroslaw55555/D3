@@ -1,0 +1,46 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+<!-- Название у нас будет proudcts -->
+{% block title %}
+News
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+
+
+
+{% block content %}
+    <h1>Все новости ({{ news|length }})</h1>
+    <hr>
+    {% if news %}
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    дата
+                </td>
+                <td>
+                    Текст
+                </td>
+            </tr>
+        {% for nw in news %}
+            <tr>
+                <td>
+                    {{ nw.title|Censor }}
+                </td>
+                <td>
+                    {{ nw.dateCreation|date:'d M Y'  }}
+                </td>
+                <td>
+                    {{ nw.text|truncatewords:20|Censor }}
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>Статей нет!</h2>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,15 @@
+<!--  наследуемся от шаблона default.html, который мы создавали ещё во времена flatpages -->
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+<!-- Название у нас будет proudcts -->
+{% block title %}
+  NewsOne
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
+{% block content %}
+  <h1>{{ new.title|Censor }}</h1>
+  <h2>{{ new.dateCreation|date:'d M Y'  }}</h2>
+  <textarea name="name" rows="8" cols="80">{{ new.text|Censor }}</textarea>
+
+{% endblock content %}
